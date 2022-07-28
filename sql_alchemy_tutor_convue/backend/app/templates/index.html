@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Login to departments</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.14.1/dist/css/uikit.min.css"/>
+
+  <link rel="stylesheet" href="../static/style.css"/>
+
+</head>
+
+<body class="uk-padding uk-height-viewport uk-flex uk-flex-center uk-flex-middle uk-background-cover " data-src="https://images.unsplash.com/photo-1490822180406-880c226c150b?fit=crop&w=650&h=433&q=80" uk-img>
+
+    <div id="app">
+
+        {{ message }}
+
+        <p>{{ message_from_async }}</p>
+
+        <button class="uk-button uk-button-primary" @click="onLogin">Login</button>
+
+      </div>
+
+        <div class="uk-padding uk-background-default">
+    
+            <h3 class="uk-heading-divider">Login to departments</h3>
+
+            <img alt="User avatar" class="uk-margin-bottom" width="600" height="400" data-src="https://images.unsplash.com/photo-1490822180406-880c226c150b?fit=crop&w=650&h=433&q=80" uk-img>
+    
+    
+            <form class="uk-panel uk-panel-box uk-form" autocomplete="off" action="/html_submit" method="post" enctype="multipart/form-data">
+
+                <div class="uk-form-row form_input_container">
+
+                    <label for="user"><i class="fa-solid fa-user"></i> User </label><br>
+
+                    <input class="uk-width-1-1 uk-form-large" name='user' id='user' type="text"  placeholder="User"><br>
+
+                </div>
+
+                <div class="uk-form-row form_input_container">
+
+                    <label for="password"><i class="fa-solid fa-lock"></i> Password</label><br>
+
+                    <input class="uk-width-1-1 uk-form-large" name='password' id='password' type="password" placeholder="Password"><br>  
+
+                </div>
+
+                <div class="uk-form-row">
+
+                    <button  class="uk-width-1-1 uk-button uk-button-primary uk-button-large" @click="onLogin">Login</button>
+
+
+                </div>
+
+                <div class="uk-form-row uk-text-small">
+
+                    <label class="uk-float-left"><input type="checkbox"> Remember Me</label>
+
+                    <a class="uk-float-right uk-link uk-link-muted" href="#">Forgot Password?</a>
+
+                </div>
+                 <!-- <button>Login</button> -->
+                <input type="submit", value="Login" class="btn">
+
+            </form>
+
+        </div>
+    
+  
+
+ 
+
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.1/dist/js/uikit.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.1/dist/js/uikit-icons.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data () {
+        return {
+          message: 'Hello Vue!',
+          message_from_async: ''
+        }
+      },
+      mounted () {
+        fetch('http://127.0.0.1:8000/').
+          then(response => response.json()).
+          then(data => this.message_from_async = data.message)
+      },
+      methods: {
+        onLogin () {
+          alert('Logged in!')
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

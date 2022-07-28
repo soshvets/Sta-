@@ -1,0 +1,26 @@
+version: "3"
+services:
+  nginx:
+    hostname: nginx
+    logging:
+      driver: none
+    build:
+      context: ../
+      dockerfile: ./frontend/Dockerfile
+    restart: always
+    depends_on:
+      - server
+    ports:
+      - 7196:80
+  server:
+    image: app
+    hostname: server
+    build:
+      context: ../
+      dockerfile: ./backend/Dockerfile
+    restart: always
+    ports:
+      - 7197:8000
+    command: bash -c 'uvicorn main:app --proxy-headers --host server --workers 2 --limit-concurrency 100'
+ 
+
